@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomeControl - Gestão de Condomínios</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/auth.css">
+</head>
+<body>
+  <div class="auth-container">
+    <!-- Brand Side -->
+    <div class="auth-brand">
+      <div class="auth-brand-logo">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 2L2 12V30H12V20H20V30H30V12L16 2Z" fill="currentColor"/>
+          <path d="M16 6L6 14V26H10V18H22V26H26V14L16 6Z" fill="white" fill-opacity="0.3"/>
+        </svg>
+        <span>HomeControl</span>
+      </div>
+      <p class="auth-brand-tagline">
+        A plataforma completa para gestão inteligente do seu condomínio
+      </p>
+      <div class="auth-brand-features">
+        <div class="auth-brand-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Controle de ocorrências e manutenções</span>
+        </div>
+        <div class="auth-brand-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Reservas de áreas comuns</span>
+        </div>
+        <div class="auth-brand-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Gestão de entregas e portaria</span>
+        </div>
+        <div class="auth-brand-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Comunicação com moradores</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Form Side -->
+    <div class="auth-content">
+      <div class="auth-form-container">
+        <div class="auth-mobile-logo">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 2L2 12V30H12V20H20V30H30V12L16 2Z" fill="currentColor"/>
+          </svg>
+          <span>HomeControl</span>
+        </div>
+
+        <div class="auth-header">
+          <h1 class="auth-title">Bem-vindo de volta</h1>
+          <p class="auth-subtitle">Entre com suas credenciais para acessar</p>
+        </div>
+
+        <form class="auth-form" id="loginForm">
+          <div class="form-group">
+            <label class="form-label" for="email">E-mail</label>
+            <div class="input-group">
+              <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <input type="email" class="form-input" id="email" placeholder="seu@email.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Senha</label>
+            <div class="input-group">
+              <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <input type="password" class="form-input" id="password" placeholder="••••••••" required>
+              <button type="button" class="input-action" onclick="togglePassword('password')">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; cursor: pointer;">
+              <input type="checkbox" class="form-checkbox">
+              Lembrar-me
+            </label>
+            <a href="#" class="auth-link">Esqueceu a senha?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg" onclick="realizarLogin">
+            Entrar
+          </button>
+        </form>
+
+        <p class="auth-footer">
+          Não tem uma conta? <a href="cadastro-usuario.html" class="auth-link">Cadastre-se</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/main.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      window.location.href = 'dashboard.html';
+    });
+  </script>
+</body>
+</html>

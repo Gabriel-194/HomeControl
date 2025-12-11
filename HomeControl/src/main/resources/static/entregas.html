@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entregas - HomeControl</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+  <div class="dashboard-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-logo">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 2L2 12V30H12V20H20V30H30V12L16 2Z" fill="currentColor"/>
+          </svg>
+        </a>
+        <span class="sidebar-logo-text">HomeControl</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-group">
+          <span class="sidebar-nav-label">Principal</span>
+          <a href="dashboard.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            Dashboard
+          </a>
+          <a href="ocorrencias.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            Ocorrências
+          </a>
+          <a href="reservas.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            Reservas
+          </a>
+        </div>
+
+        <div class="sidebar-nav-group">
+          <span class="sidebar-nav-label">Gestão</span>
+          <a href="moradores.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            Moradores
+          </a>
+          <a href="blocos.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+              <line x1="12" y1="2" x2="12" y2="22"></line>
+              <line x1="4" y1="8" x2="20" y2="8"></line>
+              <line x1="4" y1="14" x2="20" y2="14"></line>
+            </svg>
+            Blocos & Unidades
+          </a>
+          <a href="areas.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            Áreas Comuns
+          </a>
+          <a href="entregas.html" class="sidebar-nav-item active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+            Entregas
+          </a>
+        </div>
+
+        <div class="sidebar-nav-group">
+          <span class="sidebar-nav-label">Conta</span>
+          <a href="perfil.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            Meu Perfil
+          </a>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="avatar">JS</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">João Silva</div>
+            <div class="sidebar-user-role">Porteiro</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="topbar-menu-btn" onclick="toggleSidebar()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+        <nav class="topbar-breadcrumb">
+          <a href="dashboard.html">Home</a>
+          <span class="topbar-breadcrumb-separator">/</span>
+          <span class="topbar-breadcrumb-current">Entregas</span>
+        </nav>
+
+        <div class="topbar-search hide-mobile">
+          <div class="input-group">
+            <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" class="form-input" placeholder="Buscar...">
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="topbar-notification-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="topbar-notification-badge"></span>
+          </button>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Entregas</h1>
+            <p class="page-description">Controle de entregas e encomendas</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" onclick="openModal('entregaModal')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Registrar Entrega
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="card stat-card">
+            <div class="stat-icon warning">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">Aguardando Retirada</div>
+              <div class="stat-value">8</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-icon success">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">Retiradas Hoje</div>
+              <div class="stat-value">12</div>
+            </div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-icon primary">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">Total do Mês</div>
+              <div class="stat-value">156</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="card">
+          <div class="tabs">
+            <ul class="tabs-list">
+              <li><button class="tabs-trigger active" onclick="switchTab(event, 'aguardando')">Aguardando Retirada (8)</button></li>
+              <li><button class="tabs-trigger" onclick="switchTab(event, 'retiradas')">Retiradas</button></li>
+            </ul>
+          </div>
+
+          <!-- Aguardando Tab -->
+          <div id="aguardando" class="tabs-content active">
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Destinatário</th>
+                    <th>Unidade</th>
+                    <th>Descrição</th>
+                    <th>Recebido em</th>
+                    <th>Recebido por</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Maria Oliveira</td>
+                    <td>Bloco A - Apt 302</td>
+                    <td>Encomenda Amazon - Caixa média</td>
+                    <td>10/12/2025 09:30</td>
+                    <td>Carlos (Portaria)</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm" onclick="openModal('retiradaModal')">Registrar Retirada</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Pedro Santos</td>
+                    <td>Bloco B - Apt 501</td>
+                    <td>Correspondência - Carta registrada</td>
+                    <td>10/12/2025 10:15</td>
+                    <td>Carlos (Portaria)</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm" onclick="openModal('retiradaModal')">Registrar Retirada</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Ana Costa</td>
+                    <td>Bloco A - Apt 105</td>
+                    <td>Encomenda Mercado Livre - Caixa grande</td>
+                    <td>10/12/2025 11:45</td>
+                    <td>Carlos (Portaria)</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm" onclick="openModal('retiradaModal')">Registrar Retirada</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>João Silva</td>
+                    <td>Bloco A - Apt 101</td>
+                    <td>Documento - Envelope</td>
+                    <td>10/12/2025 14:20</td>
+                    <td>Roberto (Portaria)</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm" onclick="openModal('retiradaModal')">Registrar Retirada</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Retiradas Tab -->
+          <div id="retiradas" class="tabs-content">
+            <div class="table-container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Destinatário</th>
+                    <th>Unidade</th>
+                    <th>Descrição</th>
+                    <th>Recebido em</th>
+                    <th>Retirado em</th>
+                    <th>Retirado por</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Carlos Ferreira</td>
+                    <td>Bloco C - Apt 201</td>
+                    <td>Encomenda iFood Market</td>
+                    <td>10/12/2025 08:00</td>
+                    <td>10/12/2025 08:30</td>
+                    <td>Próprio morador</td>
+                  </tr>
+                  <tr>
+                    <td>Lucia Mendes</td>
+                    <td>Bloco B - Apt 402</td>
+                    <td>Encomenda Shopee - Pacote pequeno</td>
+                    <td>09/12/2025 16:45</td>
+                    <td>10/12/2025 07:15</td>
+                    <td>Próprio morador</td>
+                  </tr>
+                  <tr>
+                    <td>Roberto Lima</td>
+                    <td>Bloco A - Apt 203</td>
+                    <td>Correspondência - Boletos</td>
+                    <td>09/12/2025 14:30</td>
+                    <td>09/12/2025 19:00</td>
+                    <td>Esposa - Maria Lima</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- New Entrega Modal -->
+  <div class="modal-overlay" id="entregaModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Registrar Nova Entrega</h3>
+        <button class="modal-close" onclick="closeModal('entregaModal')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="entregaDestinatario">Destinatário / Unidade</label>
+          <select class="form-select" id="entregaDestinatario">
+            <option value="">Selecione o morador ou unidade</option>
+            <option value="1">Maria Oliveira - Bloco A, Apt 302</option>
+            <option value="2">Pedro Santos - Bloco B, Apt 501</option>
+            <option value="3">Ana Costa - Bloco A, Apt 105</option>
+            <option value="4">João Silva - Bloco A, Apt 101</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="entregaTipo">Tipo de entrega</label>
+          <select class="form-select" id="entregaTipo">
+            <option value="encomenda">Encomenda</option>
+            <option value="correspondencia">Correspondência</option>
+            <option value="documento">Documento</option>
+            <option value="outros">Outros</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="entregaDescricao">Descrição</label>
+          <textarea class="form-input" id="entregaDescricao" rows="3" placeholder="Ex: Caixa média da Amazon, envelope do banco..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="entregaRemetente">Remetente (opcional)</label>
+          <input type="text" class="form-input" id="entregaRemetente" placeholder="Ex: Amazon, Correios, Sedex...">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('entregaModal')">Cancelar</button>
+        <button class="btn btn-primary" onclick="closeModal('entregaModal')">Registrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Retirada Modal -->
+  <div class="modal-overlay" id="retiradaModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Confirmar Retirada</h3>
+        <button class="modal-close" onclick="closeModal('retiradaModal')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 1rem;">Confirme os dados da retirada:</p>
+        <div class="form-group">
+          <label class="form-label" for="retiradaPor">Retirado por</label>
+          <select class="form-select" id="retiradaPor">
+            <option value="proprio">Próprio morador</option>
+            <option value="autorizado">Pessoa autorizada</option>
+          </select>
+        </div>
+        <div class="form-group" id="pessoaAutorizada" style="display: none;">
+          <label class="form-label" for="nomeAutorizado">Nome da pessoa autorizada</label>
+          <input type="text" class="form-input" id="nomeAutorizado" placeholder="Nome completo">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="documentoRetirada">Documento (opcional)</label>
+          <input type="text" class="form-input" id="documentoRetirada" placeholder="RG ou CPF">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('retiradaModal')">Cancelar</button>
+        <button class="btn btn-primary" onclick="closeModal('retiradaModal')">Confirmar Retirada</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/main.js"></script>
+  <script>
+    document.getElementById('retiradaPor').addEventListener('change', function() {
+      document.getElementById('pessoaAutorizada').style.display = this.value === 'autorizado' ? 'block' : 'none';
+    });
+  </script>
+</body>
+</html>

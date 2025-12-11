@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moradores - HomeControl</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+  <div class="dashboard-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-logo">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 2L2 12V30H12V20H20V30H30V12L16 2Z" fill="currentColor"/>
+          </svg>
+        </a>
+        <span class="sidebar-logo-text">HomeControl</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-group">
+          <span class="sidebar-nav-label">Principal</span>
+          <a href="dashboard.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            Dashboard
+          </a>
+          <a href="ocorrencias.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            Ocorrências
+          </a>
+          <a href="reservas.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            Reservas
+          </a>
+        </div>
+
+        <div class="sidebar-nav-group">
+          <span class="sidebar-nav-label">Gestão</span>
+          <a href="moradores.html" class="sidebar-nav-item active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            Moradores
+          </a>
+          <a href="blocos.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+              <line x1="12" y1="2" x2="12" y2="22"></line>
+              <line x1="4" y1="8" x2="20" y2="8"></line>
+              <line x1="4" y1="14" x2="20" y2="14"></line>
+            </svg>
+            Blocos & Unidades
+          </a>
+          <a href="areas.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            Áreas Comuns
+          </a>
+          <a href="entregas.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+            Entregas
+          </a>
+        </div>
+
+        <div class="sidebar-nav-group">
+          <span class="sidebar-nav-label">Conta</span>
+          <a href="perfil.html" class="sidebar-nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            Meu Perfil
+          </a>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="avatar">JS</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">João Silva</div>
+            <div class="sidebar-user-role">Síndico</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="topbar-menu-btn" onclick="toggleSidebar()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+        <nav class="topbar-breadcrumb">
+          <a href="dashboard.html">Home</a>
+          <span class="topbar-breadcrumb-separator">/</span>
+          <span class="topbar-breadcrumb-current">Moradores</span>
+        </nav>
+
+        <div class="topbar-search hide-mobile">
+          <div class="input-group">
+            <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" class="form-input" placeholder="Buscar...">
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="topbar-notification-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="topbar-notification-badge"></span>
+          </button>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Moradores</h1>
+            <p class="page-description">Gerencie os moradores do condomínio</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" onclick="openModal('moradorModal')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              Novo Morador
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <input type="text" class="form-input" placeholder="Buscar por nome ou email..." style="flex: 1; min-width: 200px;">
+          <select class="form-select">
+            <option value="">Todos os blocos</option>
+            <option value="a">Bloco A</option>
+            <option value="b">Bloco B</option>
+            <option value="c">Bloco C</option>
+          </select>
+          <select class="form-select">
+            <option value="">Todos os status</option>
+            <option value="ativo">Ativo</option>
+            <option value="inativo">Inativo</option>
+          </select>
+        </div>
+
+        <!-- Moradores Table -->
+        <div class="card">
+          <div class="table-container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Morador</th>
+                  <th>Unidade</th>
+                  <th>Telefone</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                      <div class="avatar avatar-sm">MO</div>
+                      <div>
+                        <div style="font-weight: 500;">Maria Oliveira</div>
+                        <div style="font-size: 0.75rem; color: var(--foreground-muted);">maria@email.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Bloco A - Apt 302</td>
+                  <td>(11) 98765-4321</td>
+                  <td><span class="badge badge-secondary">Morador</span></td>
+                  <td><span class="badge badge-success">Ativo</span></td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-ghost btn-icon" onclick="toggleDropdown(this)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="1"></circle>
+                          <circle cx="12" cy="5" r="1"></circle>
+                          <circle cx="12" cy="19" r="1"></circle>
+                        </svg>
+                      </button>
+                      <div class="dropdown-menu">
+                        <button class="dropdown-item">Editar</button>
+                        <button class="dropdown-item">Ver detalhes</button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item danger">Desativar</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                      <div class="avatar avatar-sm">PS</div>
+                      <div>
+                        <div style="font-weight: 500;">Pedro Santos</div>
+                        <div style="font-size: 0.75rem; color: var(--foreground-muted);">pedro@email.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Bloco B - Apt 501</td>
+                  <td>(11) 91234-5678</td>
+                  <td><span class="badge badge-secondary">Morador</span></td>
+                  <td><span class="badge badge-success">Ativo</span></td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-ghost btn-icon" onclick="toggleDropdown(this)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="1"></circle>
+                          <circle cx="12" cy="5" r="1"></circle>
+                          <circle cx="12" cy="19" r="1"></circle>
+                        </svg>
+                      </button>
+                      <div class="dropdown-menu">
+                        <button class="dropdown-item">Editar</button>
+                        <button class="dropdown-item">Ver detalhes</button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item danger">Desativar</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                      <div class="avatar avatar-sm">AC</div>
+                      <div>
+                        <div style="font-weight: 500;">Ana Costa</div>
+                        <div style="font-size: 0.75rem; color: var(--foreground-muted);">ana@email.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Bloco A - Apt 105</td>
+                  <td>(11) 99876-5432</td>
+                  <td><span class="badge badge-secondary">Morador</span></td>
+                  <td><span class="badge badge-success">Ativo</span></td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-ghost btn-icon" onclick="toggleDropdown(this)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="1"></circle>
+                          <circle cx="12" cy="5" r="1"></circle>
+                          <circle cx="12" cy="19" r="1"></circle>
+                        </svg>
+                      </button>
+                      <div class="dropdown-menu">
+                        <button class="dropdown-item">Editar</button>
+                        <button class="dropdown-item">Ver detalhes</button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item danger">Desativar</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                      <div class="avatar avatar-sm">CF</div>
+                      <div>
+                        <div style="font-weight: 500;">Carlos Ferreira</div>
+                        <div style="font-size: 0.75rem; color: var(--foreground-muted);">carlos@email.com</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Bloco C - Apt 201</td>
+                  <td>(11) 94567-8901</td>
+                  <td><span class="badge badge-secondary">Morador</span></td>
+                  <td><span class="badge badge-danger">Inativo</span></td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-ghost btn-icon" onclick="toggleDropdown(this)">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="1"></circle>
+                          <circle cx="12" cy="5" r="1"></circle>
+                          <circle cx="12" cy="19" r="1"></circle>
+                        </svg>
+                      </button>
+                      <div class="dropdown-menu">
+                        <button class="dropdown-item">Editar</button>
+                        <button class="dropdown-item">Ver detalhes</button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item">Ativar</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- New Morador Modal -->
+  <div class="modal-overlay" id="moradorModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Novo Morador</h3>
+        <button class="modal-close" onclick="closeModal('moradorModal')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="moradorNome">Nome completo</label>
+          <input type="text" class="form-input" id="moradorNome" placeholder="Nome do morador">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="moradorEmail">E-mail</label>
+          <input type="email" class="form-input" id="moradorEmail" placeholder="email@exemplo.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="moradorTelefone">Telefone</label>
+          <input type="tel" class="form-input" id="moradorTelefone" placeholder="(11) 99999-9999">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="moradorBloco">Bloco</label>
+            <select class="form-select" id="moradorBloco">
+              <option value="">Selecione</option>
+              <option value="a">Bloco A</option>
+              <option value="b">Bloco B</option>
+              <option value="c">Bloco C</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="moradorUnidade">Unidade</label>
+            <input type="text" class="form-input" id="moradorUnidade" placeholder="Ex: 101">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="moradorRole">Perfil</label>
+          <select class="form-select" id="moradorRole">
+            <option value="morador">Morador</option>
+            <option value="sindico">Síndico</option>
+            <option value="porteiro">Porteiro</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('moradorModal')">Cancelar</button>
+        <button type="submit" class="btn btn-primary" onclick="salvarNovoMorador">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/main.js"></script>
+</body>
+</html>
