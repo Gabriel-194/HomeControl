@@ -157,7 +157,7 @@
             <p class="page-description">Gerencie os moradores do condomínio</p>
           </div>
           <div class="page-actions">
-            <button class="btn btn-primary" onclick="openModal('moradorModal')">
+            <button class="btn btn-primary" onclick="abrirModalNovoMorador()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -188,145 +188,9 @@
           <div class="table-container">
             <table class="table">
               <thead>
-                <tr>
-                  <th>Morador</th>
-                  <th>Unidade</th>
-                  <th>Telefone</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                      <div class="avatar avatar-sm">MO</div>
-                      <div>
-                        <div style="font-weight: 500;">Maria Oliveira</div>
-                        <div style="font-size: 0.75rem; color: var(--foreground-muted);">maria@email.com</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>Bloco A - Apt 302</td>
-                  <td>(11) 98765-4321</td>
-                  <td><span class="badge badge-secondary">Morador</span></td>
-                  <td><span class="badge badge-success">Ativo</span></td>
-                  <td>
-                    <div class="dropdown">
-                      <button class="btn btn-ghost btn-icon" onclick="toggleDropdown(this)">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <circle cx="12" cy="12" r="1"></circle>
-                          <circle cx="12" cy="5" r="1"></circle>
-                          <circle cx="12" cy="19" r="1"></circle>
-                        </svg>
-                      </button>
-                      <div class="dropdown-menu">
-                        <button class="dropdown-item">Editar</button>
-                        <button class="dropdown-item">Ver detalhes</button>
-                        <div class="dropdown-divider"></div>
-                        <button class="dropdown-item danger">Desativar</button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                      <div class="avatar avatar-sm">PS</div>
-                      <div>
-                        <div style="font-weight: 500;">Pedro Santos</div>
-                        <div style="font-size: 0.75rem; color: var(--foreground-muted);">pedro@email.com</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>Bloco B - Apt 501</td>
-                  <td>(11) 91234-5678</td>
-                  <td><span class="badge badge-secondary">Morador</span></td>
-                  <td><span class="badge badge-success">Ativo</span></td>
-                  <td>
-                    <div class="dropdown">
-                      <button class="btn btn-ghost btn-icon" onclick="toggleDropdown(this)">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <circle cx="12" cy="12" r="1"></circle>
-                          <circle cx="12" cy="5" r="1"></circle>
-                          <circle cx="12" cy="19" r="1"></circle>
-                        </svg>
-                      </button>
-                      <div class="dropdown-menu">
-                        <button class="dropdown-item">Editar</button>
-                        <button class="dropdown-item">Ver detalhes</button>
-                        <div class="dropdown-divider"></div>
-                        <button class="dropdown-item danger">Desativar</button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                      <div class="avatar avatar-sm">AC</div>
-                      <div>
-                        <div style="font-weight: 500;">Ana Costa</div>
-                        <div style="font-size: 0.75rem; color: var(--foreground-muted);">ana@email.com</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>Bloco A - Apt 105</td>
-                  <td>(11) 99876-5432</td>
-                  <td><span class="badge badge-secondary">Morador</span></td>
-                  <td><span class="badge badge-success">Ativo</span></td>
-                  <td>
-                    <div class="dropdown">
-                      <button class="btn btn-ghost btn-icon" onclick="toggleDropdown(this)">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <circle cx="12" cy="12" r="1"></circle>
-                          <circle cx="12" cy="5" r="1"></circle>
-                          <circle cx="12" cy="19" r="1"></circle>
-                        </svg>
-                      </button>
-                      <div class="dropdown-menu">
-                        <button class="dropdown-item">Editar</button>
-                        <button class="dropdown-item">Ver detalhes</button>
-                        <div class="dropdown-divider"></div>
-                        <button class="dropdown-item danger">Desativar</button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                      <div class="avatar avatar-sm">CF</div>
-                      <div>
-                        <div style="font-weight: 500;">Carlos Ferreira</div>
-                        <div style="font-size: 0.75rem; color: var(--foreground-muted);">carlos@email.com</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>Bloco C - Apt 201</td>
-                  <td>(11) 94567-8901</td>
-                  <td><span class="badge badge-secondary">Morador</span></td>
-                  <td><span class="badge badge-danger">Inativo</span></td>
-                  <td>
-                    <div class="dropdown">
-                      <button class="btn btn-ghost btn-icon" onclick="toggleDropdown(this)">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <circle cx="12" cy="12" r="1"></circle>
-                          <circle cx="12" cy="5" r="1"></circle>
-                          <circle cx="12" cy="19" r="1"></circle>
-                        </svg>
-                      </button>
-                      <div class="dropdown-menu">
-                        <button class="dropdown-item">Editar</button>
-                        <button class="dropdown-item">Ver detalhes</button>
-                        <div class="dropdown-divider"></div>
-                        <button class="dropdown-item">Ativar</button>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
+                <tbody id="tabelaMoradores">
+                </tbody>
             </table>
           </div>
         </div>
@@ -338,8 +202,8 @@
   <div class="modal-overlay" id="moradorModal">
     <div class="modal">
       <div class="modal-header">
-        <h3 class="modal-title">Novo Morador</h3>
-        <button class="modal-close" onclick="closeModal('moradorModal')">
+          <h3 class="modal-title" id="modalTitulo">Novo Morador</h3>
+          <button class="modal-close" onclick="closeModal('moradorModal')">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -385,7 +249,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" onclick="closeModal('moradorModal')">Cancelar</button>
-        <button type="submit" class="btn btn-primary" onclick="salvarNovoMorador">Salvar</button>
+          <button type="button" class="btn btn-primary" onclick="salvarNovoMorador()">Salvar</button>
       </div>
     </div>
   </div>

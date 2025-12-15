@@ -67,14 +67,13 @@ public class usuarioCadastroService {
         condominio condominio = new condominio();
         condominio.setNome(dto.getNomeCondominio());
         condominio.setSchemaName(schemaName);
-        condominio.setCodigoAcesso(schemaName.toUpperCase()); // Código simples para teste
+        condominio.setCodigoAcesso(schemaName.toUpperCase());
         condominio.setAtivo(true);
 
         condominio = condominioRepository.save(condominio);
 
         tenantService.criarSchemaCondominio(schemaName);
 
-        // 4. Vincular usuário
         user.setIdCondominio(condominio.getId());
 
         return userRepository.save(user);

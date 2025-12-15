@@ -1,3 +1,6 @@
+
+let moradorIdEmEdicao = null;
+
 // Toggle Password Visibility
 function togglePassword(inputId) {
   const input = document.getElementById(inputId)
@@ -228,11 +231,15 @@ function goToStep1() {
     document.getElementById("step1-indicator").classList.add("active");
 }
 
-function realizarLogin() {
+function realizarLogin(event) {
+    // Impede que o formulário recarregue a página
+    if(event) event.preventDefault();
+
     const email = document.getElementById('email').value;
     const senha = document.getElementById('password').value;
 
-    fetch("http://localhost:8080/auth/login", {
+    // Envia as credenciais para o backend
+    fetch("/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email, senha: senha })
@@ -240,57 +247,125 @@ function realizarLogin() {
     .then(async response => {
         if (response.ok) {
             const data = await response.json();
-            // Opcional: Salvar no localStorage apenas para exibir nome na tela,
-            // mas a segurança real está no Cookie da sessão que o navegador gerencia sozinho.
+
+            // Opcional: Salvar dados não sensíveis para exibição
             localStorage.setItem("user_name", data.nome);
             localStorage.setItem("user_role", data.role);
 
+            // SUCESSO: O servidor criou a sessão, agora podemos ir para o dashboard
             window.location.href = "dashboard.html";
         } else {
+            // ERRO: Senha errada ou usuário inativo
             const erro = await response.text();
             alert("Erro ao entrar: " + erro);
         }
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+        console.error(err);
+        alert("Erro de conexão com o servidor.");
+    });
 }
 
-function salvarNovoMorador() {
-    // Pegar os valores do modal
-    // Nota: Adicione IDs aos inputs do modal se não tiverem (ex: id="modalNome", id="modalEmail")
-    // Baseado na sua imagem, assumindo que você colocará os IDs:
 
+// --- FUNÇÕES DE MORADORES ---
+function carregarMoradores() {
+    const tbody = document.getElementById('tabelaMoradores');
+    if (!tbody) return;
+
+    fetch('/api/moradores')
+        .then(res => res.json())
+        .then(data => {
+            tbody.innerHTML = '';
+            data.forEach(m => {
+                // Define estilos e textos baseados no status
+                const statusClass = m.ativo ? 'badge-success' : 'badge-danger';
+                const statusText = m.ativo ? 'Ativo' : 'Inativo';
+
+                // Define o botão de ação (se está ativo, mostra Desativar, senão Ativar)
+                const acaoTexto = m.ativo ? 'Desativar' : 'Ativar';
+                const acaoCor = m.ativo ? 'danger' : ''; // Vermelho se for desativar
+
+                const btnEditar = `
+                    <button class="dropdown-item"
+                        onclick="abrirModalEditar(${m.id}, '${m.nome}', '${m.email || ''}', '${m.telefone}', '${m.bloco}', '${m.unidade}')">
+                        Editar
+                    </button>
+                `;
+
+                const row = `
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <div class="avatar avatar-sm">JS</div> <div><div style="font-weight: 500;">${m.nome}</div></div>
+                            </div>
+                        </td>
+                        <td>${m.bloco} - Unidade ${m.unidade}</td>
+                        <td>${m.telefone}</td>
+                        <td><span class="badge badge-secondary">${m.perfil || 'Morador'}</span></td>
+                        <td><span class="badge ${statusClass}">${statusText}</span></td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-ghost btn-icon" onclick="toggleDropdown(this)">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                                </button>
+                                <div class="dropdown-menu">
+                                    ${btnEditar}
+                                    <div class="dropdown-divider"></div>
+                                    <button class="dropdown-item ${acaoCor}" onclick="alterarStatusMorador(${m.id}, ${!m.ativo})">
+                                        ${acaoTexto}
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        });
+}
+// Helper para pegar iniciais
+function getIniciais(nome) {
+    return nome.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+}
+
+// Função unificada de Salvar
+function salvarNovoMorador() {
     const nome = document.getElementById('moradorNome').value;
     const email = document.getElementById('moradorEmail').value;
     const telefone = document.getElementById('moradorTelefone').value;
-    const bloco = document.getElementById('moradorBloco').value; // O select
-    const unidade = document.getElementById('moradorUnidade').value; // O input text
+    const blocoSelect = document.getElementById('moradorBloco');
+    const bloco = blocoSelect.options[blocoSelect.selectedIndex].text;
+    const unidade = document.getElementById('moradorUnidade').value;
     const perfil = document.getElementById('moradorRole').value;
-
-    // TODO: Em um app real, você pega esse ID da sessão/login do síndico
-    // Para teste, coloque o ID do condomínio que você criou manualmente no banco ou viu no debug
-    const idCondominio = 1;
 
     const dados = {
         nome: nome,
         email: email,
         telefone: telefone,
-        nomeBloco: bloco, // Enviando o texto "Bloco A", por exemplo
+        nomeBloco: bloco,
         numeroUnidade: parseInt(unidade),
         perfil: perfil
     };
 
-    fetch(`http://localhost:8080/api/moradores/cadastrar?idCondominio=${idCondominio}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+    let url = '/api/moradores/cadastrar';
+    let method = 'POST';
+
+    // Se tiver ID, é edição
+    if (moradorIdEmEdicao) {
+        url = `/api/moradores/${moradorIdEmEdicao}`;
+        method = 'PUT';
+    }
+
+    fetch(url, {
+        method: method,
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dados)
     })
     .then(async response => {
         if (response.ok) {
-            alert('Morador cadastrado com sucesso!');
+            alert(moradorIdEmEdicao ? 'Morador atualizado!' : 'Morador cadastrado!');
             closeModal('moradorModal');
-            window.location.reload(); // Recarrega para mostrar na tabela (se já tiver listagem)
+            carregarMoradores(); // Recarrega a tabela
         } else {
             const erro = await response.text();
             alert('Erro: ' + erro);
@@ -298,9 +373,63 @@ function salvarNovoMorador() {
     })
     .catch(error => {
         console.error('Erro:', error);
-        alert('Falha na comunicação com o servidor.');
+        alert('Falha na comunicação.');
     });
 }
 
+function alterarStatusMorador(id, novoStatus) {
+    if(!confirm("Tem certeza que deseja alterar o status deste morador?")) return;
 
+    fetch(`/api/moradores/${id}/status?ativo=${novoStatus}`, {
+        method: 'PUT'
+    })
+    .then(response => {
+        if(response.ok) {
+            carregarMoradores();
+        } else {
+            alert("Erro ao alterar status");
+        }
+    });
+}
 
+// Inicializar quando o DOM estiver pronto
+document.addEventListener("DOMContentLoaded", () => {
+    // ... seus outros listeners ...
+    carregarMoradores();
+});
+// Função chamada ao clicar em "Novo Morador"
+function abrirModalNovoMorador() {
+    moradorIdEmEdicao = null; // Limpa ID
+    document.getElementById('modalTitulo').innerText = 'Novo Morador';
+
+    // Limpa os campos
+    document.getElementById('moradorNome').value = '';
+    document.getElementById('moradorEmail').value = '';
+    document.getElementById('moradorTelefone').value = '';
+    document.getElementById('moradorUnidade').value = '';
+
+    openModal('moradorModal');
+}
+
+// Função chamada ao clicar em "Editar" na tabela
+function abrirModalEditar(id, nome, email, telefone, bloco, unidade) {
+    moradorIdEmEdicao = id; // Define ID que será editado
+    document.getElementById('modalTitulo').innerText = 'Editar Morador';
+
+    // Preenche os campos com os dados recebidos
+    document.getElementById('moradorNome').value = nome;
+    document.getElementById('moradorEmail').value = email || '';
+    document.getElementById('moradorTelefone').value = telefone;
+    document.getElementById('moradorUnidade').value = unidade;
+
+    // Selecionar o bloco no dropdown (lógica simples baseada no texto)
+    const selectBloco = document.getElementById('moradorBloco');
+    for (let i = 0; i < selectBloco.options.length; i++) {
+        if (selectBloco.options[i].text === bloco) {
+            selectBloco.selectedIndex = i;
+            break;
+        }
+    }
+
+    openModal('moradorModal');
+}

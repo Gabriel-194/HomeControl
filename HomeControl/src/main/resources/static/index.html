@@ -101,7 +101,7 @@
             <a href="#" class="auth-link">Esqueceu a senha?</a>
           </div>
 
-          <button type="submit" class="btn btn-primary btn-full btn-lg" onclick="realizarLogin">
+          <button type="submit" class="btn btn-primary btn-full btn-lg" onclick="realizarLogin(event)">
             Entrar
           </button>
         </form>
@@ -114,11 +114,12 @@
   </div>
 
   <script src="scripts/main.js"></script>
-  <script>
+  <!-- <script>
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       window.location.href = 'dashboard.html';
     });
   </script>
+  -->
 </body>
 </html>
