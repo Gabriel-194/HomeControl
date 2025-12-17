@@ -81,13 +81,6 @@ public class usuarioCadastroService {
 
     private void configurarComoMorador(User user, cadastroDto dto) {
         user.setRole(UserRole.MORADOR);
-
-        // Lógica: Buscar condomínio pelo código
-        // Condominio cond = condominioRepository.findByCodigo(dto.getCodigoCondominio())
-        //    .orElseThrow(() -> new RuntimeException("Condomínio não encontrado"));
-        // user.setIdCondominio(cond.getId());
-
-        // *SIMULAÇÃO:*
         user.setIdCondominio(2L);
     }
 }

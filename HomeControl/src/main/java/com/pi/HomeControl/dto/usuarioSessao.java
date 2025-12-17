@@ -9,7 +9,7 @@ public class usuarioSessao {
     private Long id;
     private String nome;
     private String email;
-    private String role;         // SINDICO ou MORADOR
+    private String role;
     private Long idCondominio;
-    private String schemaName;   // Importante para o SaaS saber onde salvar os dados
+    private String schemaName;
 }

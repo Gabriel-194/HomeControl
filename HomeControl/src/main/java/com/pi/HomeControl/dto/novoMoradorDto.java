@@ -7,7 +7,7 @@ public class novoMoradorDto {
     private String nome;
     private String email;
     private String telefone;
-    private String nomeBloco;   // Ex: "Bloco A"
-    private Integer numeroUnidade; // Ex: 101
-    private String perfil;      // "Morador", "Síndico", etc.
+    private String nomeBloco;
+    private Integer numeroUnidade;
+    private String perfil;
 }

@@ -1,455 +1,254 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - HomeControl</title>
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/dashboard.css">
+  <link rel="stylesheet" href="styles/main.css" th:href="@{/styles/main.css}">
+  <link rel="stylesheet" href="styles/dashboard.css" th:href="@{/styles/dashboard.css}">
 </head>
 <body>
-  <div class="dashboard-layout">
-    <!-- Sidebar Overlay -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<div class="dashboard-layout">
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <a href="dashboard.html" class="sidebar-logo">
-          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 2L2 12V30H12V20H20V30H30V12L16 2Z" fill="currentColor"/>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="dashboard.html" class="sidebar-logo">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 2L2 12V30H12V20H20V30H30V12L16 2Z" fill="currentColor"/>
+        </svg>
+      </a>
+      <span class="sidebar-logo-text">HomeControl</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-nav-group">
+        <span class="sidebar-nav-label">Principal</span>
+        <a href="dashboard.html" class="sidebar-nav-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
           </svg>
+          Dashboard
         </a>
-        <span class="sidebar-logo-text">HomeControl</span>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user dropdown">
+        <div class="avatar">JS</div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name">João Silva</div>
+          <div class="sidebar-user-role">Síndico</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <button class="topbar-menu-btn" onclick="toggleSidebar()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <nav class="topbar-breadcrumb">
+        <a href="dashboard.html">Home</a>
+        <span class="topbar-breadcrumb-separator">/</span>
+        <span class="topbar-breadcrumb-current">Dashboard</span>
+      </nav>
+      <div class="topbar-actions">
+        <div class="avatar hide-mobile">JS</div>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Dashboard</h1>
+          <p class="page-description">Visão geral do Residencial Villa Park</p>
+        </div>
       </div>
 
-      <nav class="sidebar-nav">
-        <div class="sidebar-nav-group">
-          <span class="sidebar-nav-label">Principal</span>
-          <a href="dashboard.html" class="sidebar-nav-item active">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="3" y="3" width="7" height="7"></rect>
-              <rect x="14" y="3" width="7" height="7"></rect>
-              <rect x="14" y="14" width="7" height="7"></rect>
-              <rect x="3" y="14" width="7" height="7"></rect>
-            </svg>
-            Dashboard
-          </a>
-          <a href="ocorrencias.html" class="sidebar-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <div class="stats-grid">
+
+        <div class="card stat-card">
+          <div class="stat-icon warning">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"></circle>
               <line x1="12" y1="8" x2="12" y2="12"></line>
               <line x1="12" y1="16" x2="12.01" y2="16"></line>
             </svg>
-            Ocorrências
-          </a>
-          <a href="reservas.html" class="sidebar-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">Ocorrências Pendentes</div>
+
+            <div class="stat-value" th:text="${dashboard.totalOcorrenciasPendentes}">0</div>
+
+            <div class="stat-change negative">
+              Aguardando ação
+            </div>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon primary">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
               <line x1="16" y1="2" x2="16" y2="6"></line>
               <line x1="8" y1="2" x2="8" y2="6"></line>
               <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
-            Reservas
-          </a>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">Reservas Hoje</div>
+
+            <div class="stat-value" th:text="${dashboard.totalReservasHoje} ?: '0'">0</div>
+
+            <div class="stat-change positive">
+              Agendadas para hoje
+            </div>
+          </div>
         </div>
 
-        <div class="sidebar-nav-group">
-          <span class="sidebar-nav-label">Gestão</span>
-          <a href="moradores.html" class="sidebar-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-            Moradores
-          </a>
-          <a href="blocos.html" class="sidebar-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
-              <line x1="12" y1="2" x2="12" y2="22"></line>
-              <line x1="4" y1="8" x2="20" y2="8"></line>
-              <line x1="4" y1="14" x2="20" y2="14"></line>
-            </svg>
-            Blocos & Unidades
-          </a>
-          <a href="areas.html" class="sidebar-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            Áreas Comuns
-          </a>
-          <a href="entregas.html" class="sidebar-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div class="card stat-card">
+          <div class="stat-icon success">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="1" y="3" width="15" height="13"></rect>
               <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
               <circle cx="5.5" cy="18.5" r="2.5"></circle>
               <circle cx="18.5" cy="18.5" r="2.5"></circle>
             </svg>
-            Entregas
-          </a>
-        </div>
-
-        <div class="sidebar-nav-group">
-          <span class="sidebar-nav-label">Conta</span>
-          <a href="perfil.html" class="sidebar-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-            Meu Perfil
-          </a>
-          <a href="configuracoes.html" class="sidebar-nav-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-            </svg>
-            Configurações
-          </a>
-        </div>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="sidebar-user dropdown">
-          <div class="avatar">JS</div>
-          <div class="sidebar-user-info">
-            <div class="sidebar-user-name">João Silva</div>
-            <div class="sidebar-user-role">Síndico</div>
           </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
+          <div class="stat-content">
+            <div class="stat-label">Entregas Aguardando</div>
+            <div class="stat-value" th:text="${dashboard.entregasAguardando} ?: '0'">0</div>
+
+            <div class="stat-change">
+              Na portaria
+            </div>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-icon primary">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div class="stat-content">
+            <div class="stat-label">Moradores Ativos</div>
+            <div class="stat-value" th:text="${dashboard.totalMoradores} ?: '0'">0</div>
+
+            <div class="stat-change positive">
+              Cadastrados
+            </div>
+          </div>
         </div>
       </div>
-    </aside>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Topbar -->
-      <header class="topbar">
-        <button class="topbar-menu-btn" onclick="toggleSidebar()">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
+      <div class="dashboard-grid">
 
-        <nav class="topbar-breadcrumb">
-          <a href="dashboard.html">Home</a>
-          <span class="topbar-breadcrumb-separator">/</span>
-          <span class="topbar-breadcrumb-current">Dashboard</span>
-        </nav>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Atividade Recente</h2>
+            <p class="card-description">Últimas ocorrências registradas</p>
+          </div>
+          <div class="card-body">
+            <div class="activity-list">
 
-        <div class="topbar-search hide-mobile">
-          <div class="input-group">
-            <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input type="text" class="form-input" placeholder="Buscar...">
+              <div class="activity-item" th:each="item : ${dashboard.atividadesRecentes}">
+                <div class="activity-icon orange">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                </div>
+                <div class="activity-content">
+                  <p class="activity-title">
+                    <strong th:text="${item.titulo}">Título</strong>
+                    <span class="badge" th:text="${item.status}">STATUS</span>
+                  </p>
+
+                  <span class="activity-time"
+                        th:text="${#temporals.format(item.dataCriacao, 'dd/MM/yyyy HH:mm')}">
+                          Hoje
+                    </span>
+                </div>
+              </div>
+
+              <div class="activity-item" th:if="${#lists.isEmpty(dashboard.atividadesRecentes)}">
+                <p class="text-muted" style="padding: 10px;">Nenhuma atividade recente registrada.</p>
+              </div>
+
+            </div>
           </div>
         </div>
 
-        <div class="topbar-actions">
-          <button class="topbar-notification-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-            </svg>
-            <span class="topbar-notification-badge"></span>
-          </button>
-          <div class="avatar hide-mobile">JS</div>
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Ocorrências por Categoria</h2>
+          </div>
+          <div class="card-body">
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+              <div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                  <span style="font-size: 0.875rem;">Manutenção</span>
+                  <span style="font-size: 0.875rem; font-weight: 600;">45%</span>
+                </div>
+                <div style="height: 0.5rem; background: var(--background-secondary); border-radius: 9999px; overflow: hidden;">
+                  <div style="height: 100%; width: 45%; background: var(--primary); border-radius: 9999px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </header>
+      </div>
 
-      <!-- Page Content -->
-      <div class="page-content">
-        <div class="page-header">
+      <div class="card" style="margin-top: 1.5rem;">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
           <div>
-            <h1 class="page-title">Dashboard</h1>
-            <p class="page-description">Visão geral do Residencial Villa Park</p>
+            <h2 class="card-title">Ocorrências Pendentes</h2>
+            <p class="card-description">Ocorrências aguardando resolução</p>
           </div>
+          <a href="ocorrencias.html" class="btn btn-outline btn-sm">Ver todas</a>
         </div>
-
-        <!-- Stats Grid -->
-        <div class="stats-grid">
-          <div class="card stat-card">
-            <div class="stat-icon warning">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-              </svg>
-            </div>
-            <div class="stat-content">
-              <div class="stat-label">Ocorrências Pendentes</div>
-              <div class="stat-value">12</div>
-              <div class="stat-change negative">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
-                  <polyline points="17 18 23 18 23 12"></polyline>
-                </svg>
-                +3 esta semana
-              </div>
-            </div>
-          </div>
-
-          <div class="card stat-card">
-            <div class="stat-icon primary">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
-            </div>
-            <div class="stat-content">
-              <div class="stat-label">Reservas Hoje</div>
-              <div class="stat-value">5</div>
-              <div class="stat-change positive">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                  <polyline points="17 6 23 6 23 12"></polyline>
-                </svg>
-                +2 vs ontem
-              </div>
-            </div>
-          </div>
-
-          <div class="card stat-card">
-            <div class="stat-icon success">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="1" y="3" width="15" height="13"></rect>
-                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-                <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                <circle cx="18.5" cy="18.5" r="2.5"></circle>
-              </svg>
-            </div>
-            <div class="stat-content">
-              <div class="stat-label">Entregas Aguardando</div>
-              <div class="stat-value">8</div>
-              <div class="stat-change">
-                3 desde ontem
-              </div>
-            </div>
-          </div>
-
-          <div class="card stat-card">
-            <div class="stat-icon primary">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-            </div>
-            <div class="stat-content">
-              <div class="stat-label">Moradores Ativos</div>
-              <div class="stat-value">156</div>
-              <div class="stat-change positive">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                  <polyline points="17 6 23 6 23 12"></polyline>
-                </svg>
-                +4 este mês
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Dashboard Grid -->
-        <div class="dashboard-grid">
-          <!-- Recent Activity -->
-          <div class="card">
-            <div class="card-header">
-              <h2 class="card-title">Atividade Recente</h2>
-              <p class="card-description">Últimas atualizações do condomínio</p>
-            </div>
-            <div class="card-body">
-              <div class="activity-list">
-                <div class="activity-item">
-                  <div class="activity-icon orange">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="12" y1="8" x2="12" y2="12"></line>
-                      <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                    </svg>
-                  </div>
-                  <div class="activity-content">
-                    <p class="activity-title"><strong>Maria Oliveira</strong> abriu uma nova ocorrência</p>
-                    <span class="activity-time">Há 5 minutos</span>
-                  </div>
-                </div>
-                <div class="activity-item">
-                  <div class="activity-icon blue">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                      <line x1="16" y1="2" x2="16" y2="6"></line>
-                      <line x1="8" y1="2" x2="8" y2="6"></line>
-                      <line x1="3" y1="10" x2="21" y2="10"></line>
-                    </svg>
-                  </div>
-                  <div class="activity-content">
-                    <p class="activity-title"><strong>Pedro Santos</strong> reservou o Salão de Festas</p>
-                    <span class="activity-time">Há 15 minutos</span>
-                  </div>
-                </div>
-                <div class="activity-item">
-                  <div class="activity-icon green">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <rect x="1" y="3" width="15" height="13"></rect>
-                      <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-                      <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                      <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                    </svg>
-                  </div>
-                  <div class="activity-content">
-                    <p class="activity-title">Nova entrega registrada para <strong>Apt 302</strong></p>
-                    <span class="activity-time">Há 30 minutos</span>
-                  </div>
-                </div>
-                <div class="activity-item">
-                  <div class="activity-icon green">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                  </div>
-                  <div class="activity-content">
-                    <p class="activity-title">Ocorrência <strong>#1234</strong> foi resolvida</p>
-                    <span class="activity-time">Há 1 hora</span>
-                  </div>
-                </div>
-                <div class="activity-item">
-                  <div class="activity-icon blue">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                      <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                  </div>
-                  <div class="activity-content">
-                    <p class="activity-title">Novo morador cadastrado: <strong>Ana Costa</strong></p>
-                    <span class="activity-time">Há 2 horas</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Quick Stats -->
-          <div class="card">
-            <div class="card-header">
-              <h2 class="card-title">Ocorrências por Categoria</h2>
-            </div>
-            <div class="card-body">
-              <div style="display: flex; flex-direction: column; gap: 1rem;">
-                <div>
-                  <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.875rem;">Manutenção</span>
-                    <span style="font-size: 0.875rem; font-weight: 600;">45%</span>
-                  </div>
-                  <div style="height: 0.5rem; background: var(--background-secondary); border-radius: 9999px; overflow: hidden;">
-                    <div style="height: 100%; width: 45%; background: var(--primary); border-radius: 9999px;"></div>
-                  </div>
-                </div>
-                <div>
-                  <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.875rem;">Barulho</span>
-                    <span style="font-size: 0.875rem; font-weight: 600;">25%</span>
-                  </div>
-                  <div style="height: 0.5rem; background: var(--background-secondary); border-radius: 9999px; overflow: hidden;">
-                    <div style="height: 100%; width: 25%; background: var(--warning); border-radius: 9999px;"></div>
-                  </div>
-                </div>
-                <div>
-                  <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.875rem;">Segurança</span>
-                    <span style="font-size: 0.875rem; font-weight: 600;">20%</span>
-                  </div>
-                  <div style="height: 0.5rem; background: var(--background-secondary); border-radius: 9999px; overflow: hidden;">
-                    <div style="height: 100%; width: 20%; background: var(--danger); border-radius: 9999px;"></div>
-                  </div>
-                </div>
-                <div>
-                  <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.875rem;">Outros</span>
-                    <span style="font-size: 0.875rem; font-weight: 600;">10%</span>
-                  </div>
-                  <div style="height: 0.5rem; background: var(--background-secondary); border-radius: 9999px; overflow: hidden;">
-                    <div style="height: 100%; width: 10%; background: var(--success); border-radius: 9999px;"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pending Ocorrencias Table -->
-        <div class="card" style="margin-top: 1.5rem;">
-          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-              <h2 class="card-title">Ocorrências Pendentes</h2>
-              <p class="card-description">Ocorrências aguardando resolução</p>
-            </div>
-            <a href="ocorrencias.html" class="btn btn-outline btn-sm">Ver todas</a>
-          </div>
-          <div class="table-container">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Título</th>
-                  <th>Morador</th>
-                  <th>Categoria</th>
-                  <th>Data</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>#1247</td>
-                  <td>Vazamento no teto da garagem</td>
-                  <td>Maria Oliveira</td>
-                  <td><span class="badge badge-primary">Manutenção</span></td>
-                  <td>10/12/2025</td>
-                  <td><span class="badge badge-warning">Pendente</span></td>
-                  <td>
-                    <button class="btn btn-ghost btn-sm">Ver</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>#1246</td>
-                  <td>Barulho excessivo apt 501</td>
-                  <td>Pedro Santos</td>
-                  <td><span class="badge badge-secondary">Barulho</span></td>
-                  <td>09/12/2025</td>
-                  <td><span class="badge badge-primary">Em análise</span></td>
-                  <td>
-                    <button class="btn btn-ghost btn-sm">Ver</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>#1245</td>
-                  <td>Elevador com defeito</td>
-                  <td>Ana Costa</td>
-                  <td><span class="badge badge-primary">Manutenção</span></td>
-                  <td>08/12/2025</td>
-                  <td><span class="badge badge-warning">Pendente</span></td>
-                  <td>
-                    <button class="btn btn-ghost btn-sm">Ver</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Morador</th> <th>Data</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>#1247</td>
+              <td>Vazamento no teto</td>
+              <td>Maria Oliveira</td>
+              <td>10/12/2025</td>
+              <td><span class="badge badge-warning">Pendente</span></td>
+              <td><button class="btn btn-ghost btn-sm">Ver</button></td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </main>
-  </div>
+    </div>
+  </main>
+</div>
 
-  <script src="scripts/main.js"></script>
+<script src="scripts/main.js" th:src="@{/scripts/main.js}"></script>
 </body>
 </html>
